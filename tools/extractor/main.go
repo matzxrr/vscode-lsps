@@ -66,6 +66,8 @@ func main() {
 	if err := os.MkdirAll(lspWorkDir, 0755); err != nil {
 		log.Fatalf("Error creating working directory: %v", err)
 	}
+	// Should we cleanup tmp?
+	// defer os.RemoveAll(lspWorkDir)
 
 	repoDir := filepath.Join(lspWorkDir, "repo")
 	if _, err := os.Stat(repoDir); os.IsNotExist(err) {
@@ -115,7 +117,12 @@ func main() {
 		}
 	}
 
-	outputDir := filepath.Join(lspWorkDir, "output")
+	repoRoot, err := getRepoRoot()
+	if err != nil {
+		log.Fatalf("Error getting root directory: %v", err)
+	}
+
+	outputDir := filepath.Join(repoRoot, "out", config.Name)
 	if err := os.MkdirAll(outputDir, 0755); err != nil {
 		log.Fatalf("Error creating output directory: %v", err)
 	}
@@ -142,4 +149,13 @@ func main() {
 			log.Fatalf("Error running copy output command: %v", err)
 		}
 	}
+}
+
+func getRepoRoot() (string, error) {
+	cmd := exec.Command("git", "rev-parse", "--show-toplevel")
+	output, err := cmd.Output()
+	if err != nil {
+		return "", fmt.Errorf("failed to get repo root: %w", err)
+	}
+	return strings.TrimSpace(string(output)), nil
 }
