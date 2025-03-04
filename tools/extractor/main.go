@@ -16,6 +16,7 @@ type LSPConfig struct {
 	RepoBuildCmds   []string
 	ServerPath      string
 	ServerBuildCmds []string
+	ServerOutDir    string
 	BinaryName      string
 	ModulePath      string
 	VersionKey      string
@@ -28,6 +29,7 @@ var lsps = map[string]LSPConfig{
 		RepoBuildCmds:   []string{"npm install"},
 		ServerPath:      "server",
 		ServerBuildCmds: []string{"npm install", "npm run webpack"},
+		ServerOutDir:    "out",
 		BinaryName:      "eslint-lsp",
 		ModulePath:      "github.com/matzxrr/vscode-lsps/eslint",
 		VersionKey:      "version",
@@ -118,5 +120,26 @@ func main() {
 		log.Fatalf("Error creating output directory: %v", err)
 	}
 
+	serverOutDir := filepath.Join(serverDir, config.ServerOutDir)
+
+	wildcardOut := filepath.Join(serverOutDir, "*")
+	items, err := filepath.Glob(wildcardOut)
+	if err != nil {
+		log.Fatalf("Error finding files to copy: %v", err)
+	}
+
+	if len(items) == 0 {
+		log.Fatalf("Error: No files found in '%s' to copy", wildcardOut)
+	}
 	
+	log.Printf("Copying assets from out directory to output")
+	for _, item := range items {
+		command := exec.Command("cp", "-r", item, outputDir)
+		command.Dir = outputDir
+		command.Stdout = os.Stdout
+		command.Stderr = os.Stderr
+		if err := command.Run(); err != nil {
+			log.Fatalf("Error running copy output command: %v", err)
+		}
+	}
 }

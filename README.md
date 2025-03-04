@@ -1,6 +1,8 @@
-# ESLint Language Server
+# VSCode LSPs
 
-Extracted from `https://github.com/microsoft/vscode-eslint`.
+Extracted from their upstream repositories and built individually.
+
+- `https://github.com/microsoft/vscode-eslint`.
 
 Credit to `hrsh7th/vscode-langservers-extracted` for the original.
 
