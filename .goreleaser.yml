@@ -20,7 +20,7 @@ builds:
 archives:
   - id: eslint
     builds:
-      - eslint-lsp
+      - eslint
     name_template: "eslint-lsp_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     formats: [ 'tar.gz' ]
     format_overrides:
@@ -28,8 +28,8 @@ archives:
         formats: [ 'zip' ]
     files:
       - LICENSE
-        README.md
-        out/eslint/*
+      - README.md
+      - out/eslint/*
 
 checksum:
   name_template: "checksums.txt"
