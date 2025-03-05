@@ -50,6 +50,6 @@ changelog:
 release:
   github:
     owner: matzxrr
-    name: vscode-lsp
+    name: vscode-lsps
   prerelease: auto
   draft: true
