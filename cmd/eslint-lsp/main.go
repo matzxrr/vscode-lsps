@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	cmd := exec.Command("node", "-v")
+	cmd := exec.Command("node", "bundle/eslintServer.js")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 

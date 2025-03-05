@@ -29,7 +29,9 @@ archives:
     files:
       - LICENSE
       - README.md
-      - out/eslint/*
+      - src: "out/eslint/*"
+        dst: bundle
+        strip_parent: true
 
 checksum:
   name_template: "checksums.txt"
