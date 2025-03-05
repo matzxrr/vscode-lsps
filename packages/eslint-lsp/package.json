@@ -1,0 +1,13 @@
+{
+  "name": "eslint-lsp",
+  "version": "0.0.0",
+  "description": "ESLint LSP Extracted from blah",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matzxrr/vscode-lsps/packages/eslint-lsp"
+  },
+  "keywords": ["eslint-lsp", "lsp"],
+  "author": "matzxrr",
+  "license": "MIT"
+}

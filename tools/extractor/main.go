@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -61,6 +62,13 @@ func main() {
 		printAvailableLSPs()
 		os.Exit(1)
 	}
+
+	j, err := json.MarshalIndent(config, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Printf("%s", j)
+	return
 
 	lspWorkDir := filepath.Join(*workDir, config.Name)
 	if err := os.MkdirAll(lspWorkDir, 0755); err != nil {
