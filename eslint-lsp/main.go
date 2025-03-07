@@ -107,7 +107,7 @@ func main() {
 		log.Fatalf("Error: No files found in '%s' to copy", wildcardOut)
 	}
 
-	log.Printf("Copying assets from out directory to output")
+	log.Printf("Copying assets from %s to %s", serverOutDir, outputDir)
 	for _, item := range items {
 		command := exec.Command("cp", "-r", item, outputDir)
 		command.Dir = outputDir
