@@ -31,6 +31,7 @@ install:
 	@echo "Install complete."
 
 .PHONY: uninstall
+uninstall:
 	@echo "Uninstalling..."
 	rm -r $(INSTALL_BIN_DIR)/$(BIN_NAME)
 	rm -rf $(INSTALL_LIB_DIR)
